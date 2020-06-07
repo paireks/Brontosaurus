@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Drawing;
+using Grasshopper.GUI.Canvas;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Attributes;
 using Rhino.Geometry;
 
 namespace Charonosaurus
@@ -11,7 +13,7 @@ namespace Charonosaurus
         public AssertGH()
           : base("Assert", "Assert",
               "If your actual value == expected value: component will pass the test.",
-              "Pterodactyl", "Test")
+              "Charonosaurus", "Test")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
@@ -33,19 +35,34 @@ namespace Charonosaurus
         {
             pManager.AddTextParameter("Result", "Result", "Information about tests, which one passed/failed",
                 GH_ParamAccess.list);
+            pManager.AddTextParameter("Failed Info", "Failed Info", "Information about failed tests",
+                GH_ParamAccess.list);
             pManager.AddTextParameter("ReportPart", "ReportPart",
                 "Created part of the report, you can use it with Pterodactyl plugin to create custom reports",
                 GH_ParamAccess.item);
         }
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-
+            base.DestroyIconCache();
         }
+        private bool A;
+        private bool B;
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                return null;
+                if (A)
+                {
+                    return Properties.Resources.Ok;
+                }
+                else if (B)
+                {
+                    return Properties.Resources.Failed;
+                }
+                else
+                {
+                    return Properties.Resources.Wrong;
+                }
             }
         }
         public override Guid ComponentGuid
