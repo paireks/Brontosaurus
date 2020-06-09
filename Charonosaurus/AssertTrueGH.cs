@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
@@ -8,6 +8,8 @@ namespace Charonosaurus
 {
     public class AssertTrueGH : GH_Component
     {
+        private bool _testsPassed;
+        private bool _unusedComponent = true;
         public AssertTrueGH()
           : base("Assert True", "Assert True",
               "If your actual value == True: component will pass the test.",
@@ -20,20 +22,17 @@ namespace Charonosaurus
                 "Test Names",
                 "Test names as list, so it'll be easier to check which test passed/failed",
                 GH_ParamAccess.list);
-            pManager.AddBooleanParameter("Actual",
-                "Actual",
-                "Actual values that you want to check, as list",
+            pManager.AddTextParameter("Expected",
+                "Expected",
+                "Expected values as list",
                 GH_ParamAccess.list);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Result", "Result", "Information about tests, which one passed/failed",
+            pManager.AddTextParameter("Result", "Result", "Result of tests",
                 GH_ParamAccess.list);
             pManager.AddTextParameter("Failed Info", "Failed Info", "Information about failed tests",
                 GH_ParamAccess.list);
-            pManager.AddTextParameter("ReportPart", "ReportPart",
-                "Created part of the report, you can use it with Pterodactyl plugin to create custom reports",
-                GH_ParamAccess.item);
         }
         protected override void SolveInstance(IGH_DataAccess DA)
         {
@@ -42,30 +41,30 @@ namespace Charonosaurus
 
             DA.GetDataList(0, names);
             DA.GetDataList(1, actual);
-            
+
             DestroyIconCache();
 
             _testsPassed = true;
+            _unusedComponent = false;
 
             foreach (var currentActual in actual)
             {
                 if (currentActual == false)
                 {
                     _testsPassed = false;
+                    break;
                 }
             }
         }
-
-        private bool _testsPassed;
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                if (_testsPassed)
+                if (_testsPassed && !_unusedComponent)
                 {
                     return Properties.Resources.Ok;
                 }
-                else if (_testsPassed == false)
+                else if (!_testsPassed && !_unusedComponent)
                 {
                     return Properties.Resources.Failed;
                 }

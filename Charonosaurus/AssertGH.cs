@@ -10,6 +10,8 @@ namespace Charonosaurus
 {
     public class AssertGH : GH_Component
     {
+        private bool _testsPassed;
+        private bool _unusedComponent = true;
         public AssertGH()
           : base("Assert", "Assert",
               "If your actual value == expected value: component will pass the test.",
@@ -22,40 +24,53 @@ namespace Charonosaurus
                 "Test Names",
                 "Test names as list, so it'll be easier to check which test passed/failed",
                 GH_ParamAccess.list);
-            pManager.AddTextParameter("Actual",
-                "Actual",
-                "Actual values that you want to check, as list",
-                GH_ParamAccess.list);
             pManager.AddTextParameter("Expected",
                 "Expected",
                 "Expected values as list",
                 GH_ParamAccess.list);
+            pManager.AddTextParameter("Actual",
+                "Actual",
+                "Actual values that you want to check, as list",
+                GH_ParamAccess.list);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Result", "Result", "Information about tests, which one passed/failed",
+            pManager.AddTextParameter("Result", "Result", "Result of tests",
                 GH_ParamAccess.list);
             pManager.AddTextParameter("Failed Info", "Failed Info", "Information about failed tests",
                 GH_ParamAccess.list);
-            pManager.AddTextParameter("ReportPart", "ReportPart",
-                "Created part of the report, you can use it with Pterodactyl plugin to create custom reports",
-                GH_ParamAccess.item);
         }
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            base.DestroyIconCache();
+            List<string> names = new List<string>();
+            List<bool> actual = new List<bool>();
+
+            DA.GetDataList(0, names);
+            DA.GetDataList(1, actual);
+
+            DestroyIconCache();
+
+            _testsPassed = true;
+            _unusedComponent = false;
+
+            foreach (var currentActual in actual)
+            {
+                if (currentActual == false)
+                {
+                    _testsPassed = false;
+                    break;
+                }
+            }
         }
-        private bool A;
-        private bool B;
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                if (A)
+                if (_testsPassed && !_unusedComponent)
                 {
                     return Properties.Resources.Ok;
                 }
-                else if (B)
+                else if (!_testsPassed && !_unusedComponent)
                 {
                     return Properties.Resources.Failed;
                 }
