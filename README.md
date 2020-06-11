@@ -1,2 +1,2 @@
-# Charonosaurus
+# Brontosaurus
  Simple Grasshopper plugin to make unit tests inside Grasshopper

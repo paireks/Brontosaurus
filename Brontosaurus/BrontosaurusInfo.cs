@@ -2,15 +2,15 @@
 using System.Drawing;
 using Grasshopper.Kernel;
 
-namespace Charonosaurus
+namespace Brontosaurus
 {
-    public class CharonosaurusInfo : GH_AssemblyInfo
+    public class BrontosaurusInfo : GH_AssemblyInfo
     {
         public override string Name
         {
             get
             {
-                return "Charonosaurus";
+                return "Brontosaurus";
             }
         }
         public override Bitmap Icon
@@ -24,7 +24,7 @@ namespace Charonosaurus
         {
             get
             {
-                return "Charonosaurus will help you to create unit tests";
+                return "Brontosaurus will help you to create unit tests";
             }
         }
         public override Guid Id
@@ -47,6 +47,14 @@ namespace Charonosaurus
             get
             {
                 return "w.radaczynski@gmail.com";
+            }
+        }
+
+        public override string Version
+        {
+            get
+            {
+                return "1.0.0.0";
             }
         }
     }

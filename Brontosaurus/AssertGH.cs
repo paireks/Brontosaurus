@@ -6,7 +6,7 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
 using Rhino.Geometry;
 
-namespace Charonosaurus
+namespace Brontosaurus
 {
     public class AssertGH : GH_Component
     {
@@ -15,7 +15,7 @@ namespace Charonosaurus
         public AssertGH()
           : base("Assert", "Assert",
               "If your actual value == expected value: component will pass the test.",
-              "Charonosaurus", "Test")
+              "Brontosaurus", "Test")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)

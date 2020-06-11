@@ -4,7 +4,7 @@ using System.Linq;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace Charonosaurus
+namespace Brontosaurus
 {
     public class AssertTrueGH : GH_Component
     {
@@ -13,7 +13,7 @@ namespace Charonosaurus
         public AssertTrueGH()
           : base("Assert True", "Assert True",
               "If your actual value == True: component will pass the test.",
-              "Charonosaurus", "Test")
+              "Brontosaurus", "Test")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
@@ -22,7 +22,7 @@ namespace Charonosaurus
                 "Test Names",
                 "Test names as list, so it'll be easier to check which test passed/failed",
                 GH_ParamAccess.list);
-            pManager.AddTextParameter("Expected",
+            pManager.AddBooleanParameter("Expected",
                 "Expected",
                 "Expected values as list",
                 GH_ParamAccess.list);

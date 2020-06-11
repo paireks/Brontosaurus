@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace CharonosaurusTests
+namespace BrontosaurusTests
 {
     public class UnitTest1
     {

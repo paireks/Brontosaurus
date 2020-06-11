@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace Charonosaurus
+namespace Brontosaurus
 {
     public class TotalGH : GH_Component
     {
@@ -13,7 +13,7 @@ namespace Charonosaurus
         public TotalGH()
           : base("Total", "Total",
               "Group tests and create stats for all of them",
-              "Charonosaurus", "Group")
+              "Brontosaurus", "Group")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)

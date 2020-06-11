@@ -8,8 +8,8 @@
     <ProjectGuid>{0B345687-7C33-41FD-9D27-2F191A720D15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Charonosaurus</RootNamespace>
-    <AssemblyName>Charonosaurus</AssemblyName>
+    <RootNamespace>Brontosaurus</RootNamespace>
+    <AssemblyName>Brontosaurus</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="AssertGH.cs" />
     <Compile Include="AssertTrueGH.cs" />
-    <Compile Include="CharonosaurusInfo.cs" />
+    <Compile Include="BrontosaurusInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,7 +91,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\EngineerDesign\AppData\Roaming\Grasshopper\Libraries\Charonosaurus\Charonosaurus.gha"</PostBuildEvent>
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\EngineerDesign\AppData\Roaming\Grasshopper\Libraries\Brontosaurus\Brontosaurus.gha"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <FallbackCulture>en-US</FallbackCulture>

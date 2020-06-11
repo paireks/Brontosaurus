@@ -7,8 +7,8 @@
     <ProjectGuid>{D95A796E-0E4D-48EF-BFF1-E7937CDF2B30}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CharonosaurusEngine</RootNamespace>
-    <AssemblyName>CharonosaurusEngine</AssemblyName>
+    <RootNamespace>BrontosaurusEngine</RootNamespace>
+    <AssemblyName>BrontosaurusEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
