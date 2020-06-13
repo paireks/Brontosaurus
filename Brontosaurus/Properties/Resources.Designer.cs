@@ -63,6 +63,36 @@ namespace Brontosaurus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Assert {
+            get {
+                object obj = ResourceManager.GetObject("Assert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AssertPoint {
+            get {
+                object obj = ResourceManager.GetObject("AssertPoint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AssertVector {
+            get {
+                object obj = ResourceManager.GetObject("AssertVector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Failed {
             get {
                 object obj = ResourceManager.GetObject("Failed", resourceCulture);
@@ -76,16 +106,6 @@ namespace Brontosaurus.Properties {
         internal static System.Drawing.Bitmap Ok {
             get {
                 object obj = ResourceManager.GetObject("Ok", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Wrong {
-            get {
-                object obj = ResourceManager.GetObject("Wrong", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

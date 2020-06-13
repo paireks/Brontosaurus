@@ -43,19 +43,21 @@ namespace Brontosaurus
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             List<string> names = new List<string>();
-            List<bool> actual = new List<bool>();
+            List<string> actual = new List<string>();
+            List<string> expected = new List<string>();
 
             DA.GetDataList(0, names);
             DA.GetDataList(1, actual);
+            DA.GetDataList(2, expected);
 
             DestroyIconCache();
 
             _testsPassed = true;
             _unusedComponent = false;
 
-            foreach (var currentActual in actual)
+            for (int i = 0; i < actual.Count; i++)
             {
-                if (currentActual == false)
+                if (actual[i] != expected[i])
                 {
                     _testsPassed = false;
                     break;
@@ -76,7 +78,7 @@ namespace Brontosaurus
                 }
                 else
                 {
-                    return Properties.Resources.Wrong;
+                    return Properties.Resources.Assert;
                 }
             }
         }

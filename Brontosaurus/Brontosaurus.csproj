@@ -74,7 +74,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Failed.png" />
+    <None Include="Resources\Assert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AssertPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AssertVector.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ok.png" />

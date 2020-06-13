@@ -70,7 +70,7 @@ namespace Brontosaurus
                 }
                 else
                 {
-                    return Properties.Resources.Wrong;
+                    return Properties.Resources.Failed;
                 }
             }
         }
