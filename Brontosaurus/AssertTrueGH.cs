@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using BrontosaurusEngine;
 
 namespace Brontosaurus
 {
     public class AssertTrueGH : GH_Component
     {
-        private bool _testsPassed;
+        private bool _testsFailed;
         private bool _unusedComponent = true;
         public AssertTrueGH()
           : base("Assert True", "Assert True",
               "If your actual value == True: component will pass the test.",
-              "Brontosaurus", "Test")
+              "Brontosaurus", "Assert")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
@@ -22,9 +23,9 @@ namespace Brontosaurus
                 "Test Names",
                 "Test names as list, so it'll be easier to check which test passed/failed",
                 GH_ParamAccess.list);
-            pManager.AddBooleanParameter("Expected",
-                "Expected",
-                "Expected values as list",
+            pManager.AddBooleanParameter("Actual",
+                "Actual",
+                "Actual values as list",
                 GH_ParamAccess.list);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
@@ -44,27 +45,23 @@ namespace Brontosaurus
 
             DestroyIconCache();
 
-            _testsPassed = true;
+            Test testObject = new Test(actual, names);
+
+            _testsFailed = testObject.Failed;
             _unusedComponent = false;
 
-            foreach (var currentActual in actual)
-            {
-                if (currentActual == false)
-                {
-                    _testsPassed = false;
-                    break;
-                }
-            }
+            DA.SetDataList(0, testObject.Result);
+            DA.SetDataList(1, testObject.FailedInfo);
         }
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                if (_testsPassed && !_unusedComponent)
+                if (!_testsFailed && !_unusedComponent)
                 {
                     return Properties.Resources.Ok;
                 }
-                else if (!_testsPassed && !_unusedComponent)
+                else if (_testsFailed && !_unusedComponent)
                 {
                     return Properties.Resources.Failed;
                 }

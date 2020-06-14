@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrontosaurusEngine
 {
-    class Result
+    class Total
     {
-
     }
 }

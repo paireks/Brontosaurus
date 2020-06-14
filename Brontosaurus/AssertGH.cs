@@ -5,17 +5,18 @@ using Grasshopper.GUI.Canvas;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
 using Rhino.Geometry;
+using BrontosaurusEngine;
 
 namespace Brontosaurus
 {
     public class AssertGH : GH_Component
     {
-        private bool _testsPassed;
+        private bool _testsFailed;
         private bool _unusedComponent = true;
         public AssertGH()
           : base("Assert", "Assert",
               "If your actual value == expected value: component will pass the test.",
-              "Brontosaurus", "Test")
+              "Brontosaurus", "Assert")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
@@ -53,27 +54,23 @@ namespace Brontosaurus
 
             DestroyIconCache();
 
-            _testsPassed = true;
+            Test testObject = new Test(expected, actual, names);
+
+            _testsFailed = testObject.Failed;
             _unusedComponent = false;
 
-            for (int i = 0; i < actual.Count; i++)
-            {
-                if (actual[i] != expected[i])
-                {
-                    _testsPassed = false;
-                    break;
-                }
-            }
+            DA.SetDataList(0, testObject.Result);
+            DA.SetDataList(1, testObject.FailedInfo);
         }
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                if (_testsPassed && !_unusedComponent)
+                if (!_testsFailed && !_unusedComponent)
                 {
                     return Properties.Resources.Ok;
                 }
-                else if (!_testsPassed && !_unusedComponent)
+                else if (_testsFailed && !_unusedComponent)
                 {
                     return Properties.Resources.Failed;
                 }

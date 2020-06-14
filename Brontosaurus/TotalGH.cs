@@ -13,15 +13,11 @@ namespace Brontosaurus
         public TotalGH()
           : base("Total", "Total",
               "Group tests and create stats for all of them",
-              "Brontosaurus", "Group")
+              "Brontosaurus", "Total")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Group Names",
-                "Group Names",
-                "Group names as list, important for report creation",
-                GH_ParamAccess.list);
             pManager.AddTextParameter("Results",
                 "Results",
                 "Results of tests",
@@ -36,11 +32,9 @@ namespace Brontosaurus
         }
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<string> names = new List<string>();
             List<string> results = new List<string>();
 
-            DA.GetDataList(0, names);
-            DA.GetDataList(1, results);
+            DA.GetDataList(0, results);
 
             DestroyIconCache();
 
@@ -51,7 +45,7 @@ namespace Brontosaurus
         {
             get
             {
-                return null;
+                return Properties.Resources.Total;
             }
         }
         public override Guid ComponentGuid
