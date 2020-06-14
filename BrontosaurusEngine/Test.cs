@@ -8,5 +8,7 @@ namespace BrontosaurusEngine
 {
     public class Test
     {
+        private bool _testsPassed;
+        private bool _unusedComponent = true;
     }
 }

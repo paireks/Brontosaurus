@@ -22,7 +22,8 @@ namespace Brontosaurus
         {
             pManager.AddTextParameter("Test Names",
                 "Test Names",
-                "Test names as list, so it'll be easier to check which test passed/failed",
+                "Test names as list, so it'll be easier to check which test passed/failed." +
+                " Every name should match every assert (expected and actual value)",
                 GH_ParamAccess.list);
             pManager.AddTextParameter("Expected",
                 "Expected",
