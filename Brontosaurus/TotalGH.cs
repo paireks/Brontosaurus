@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
+using BrontosaurusEngine;
+
 namespace Brontosaurus
 {
     public class TotalGH : GH_Component
@@ -26,7 +28,7 @@ namespace Brontosaurus
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddTextParameter("Total Result", "Total Result", "Total result of tests",
-                GH_ParamAccess.list);
+                GH_ParamAccess.item);
             pManager.AddTextParameter("Report Part", "Report Part", "Created part of the report",
                 GH_ParamAccess.item);
         }
@@ -38,14 +40,29 @@ namespace Brontosaurus
 
             DestroyIconCache();
 
-            _testsPassed = true;
+            Total totalObject = new Total(results);
+
+            _testsPassed = totalObject.AllTestPassed;
             _unusedComponent = false;
+
+            DA.SetData(0, totalObject.TotalResult);
         }
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                return Properties.Resources.Total;
+                if (_testsPassed && !_unusedComponent)
+                {
+                    return Properties.Resources.Ok;
+                }
+                else if (!_testsPassed && !_unusedComponent)
+                {
+                    return Properties.Resources.Failed;
+                }
+                else
+                {
+                    return Properties.Resources.Total;
+                }
             }
         }
         public override Guid ComponentGuid
