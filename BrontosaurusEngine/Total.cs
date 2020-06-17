@@ -15,6 +15,7 @@ namespace BrontosaurusEngine
         private float _passedPercent;
         private string _totalResult;
         private bool _allTestPassed;
+        private string _reportPart;
 
         public Total(List<string> results)
         {
@@ -23,6 +24,7 @@ namespace BrontosaurusEngine
             _passedCounter = 0;
             _failedCounter = 0;
             _allTestPassed = true;
+            _reportPart = "| Name | Result |" + Environment.NewLine + "| :---: | :---: |" + Environment.NewLine;
 
             foreach (var i in Results)
             {
@@ -31,16 +33,22 @@ namespace BrontosaurusEngine
                 if (parts[1] == "OK")
                 {
                     _passedCounter++;
+                    _reportPart += "| " + parts[0] + " | <span style=\"color: green\">" + parts[1] + "</span> |" + Environment.NewLine;
                 }
                 else
                 {
                     _failedCounter++;
                     _allTestPassed = false;
+                    _reportPart += "| " + parts[0] + " | <span style=\"color: red\">" + parts[1] + "</span> |" + Environment.NewLine;
                 }
             }
 
             _passedPercent = (float)_passedCounter / (_passedCounter + _failedCounter) * 100;
-            _totalResult = "Total result: " + _passedPercent.ToString() + "% tests passed.";
+            _totalResult = "Total result: " + _passedPercent.ToString() + "% tests passed."
+                           + Environment.NewLine + "Tests passed: " + _passedCounter
+                           + Environment.NewLine + "Tests failed: " + _failedCounter;
+
+            _reportPart = _totalResult + Environment.NewLine + _reportPart;
 
         }
 
@@ -69,6 +77,11 @@ namespace BrontosaurusEngine
         public bool AllTestPassed
         {
             get { return _allTestPassed; }
+        }
+
+        public string ReportPart
+        {
+            get { return _reportPart; }
         }
     }
 }

@@ -46,6 +46,7 @@ namespace Brontosaurus
             _unusedComponent = false;
 
             DA.SetData(0, totalObject.TotalResult);
+            DA.SetData(1, totalObject.ReportPart);
         }
         protected override System.Drawing.Bitmap Icon
         {
