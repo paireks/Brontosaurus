@@ -24,7 +24,7 @@ namespace Brontosaurus
         {
             get
             {
-                return "Brontosaurus will help you to create unit tests";
+                return "Brontosaurus will help you to create unit tests inside Grasshopper";
             }
         }
         public override Guid Id
@@ -39,7 +39,7 @@ namespace Brontosaurus
         {
             get
             {
-                return "Wojciech Radaczyński";
+                return "Wojciech Radaczynski";
             }
         }
         public override string AuthorContact
