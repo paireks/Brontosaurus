@@ -5,67 +5,53 @@ using BrontosaurusEngine;
 
 namespace BrontosaurusEngineTests
 {
+
     public class TestTest
     {
-        [Fact]
-        public void TestFailingAssert()
+        [Theory]
+        [ClassData(typeof(TestAssert_InputProperties_Helper))]
+        public void TestAssert_InputProperties_Helper(List<string> exp, List<string> act, List<string> names)
         {
-            List<string> exp = new List<string>{ "5" };
-            List<string> act = new List<string>{ "4" };
-            List<string> names = new List<string>{"TestName"};
-
             Test testObject = new Test(exp, act, names);
 
-            Assert.True(testObject.Failed);
             Assert.Equal(exp, testObject.Expected);
             Assert.Equal(act, testObject.Actual);
             Assert.Equal(names, testObject.Names);
         }
 
-        [Fact]
-        public void TestPassingAssert()
+        [Theory]
+        [ClassData(typeof(TestAssertTrue_InputProperties_Helper))]
+        public void TestAssertTrue_InputProperties_Helper(List<bool> act, List<string> names)
         {
-            List<string> exp = new List<string> { "4" };
-            List<string> act = new List<string> { "4" };
-            List<string> names = new List<string> { "TestName" };
+            Test testObject = new Test(act, names);
 
+            Assert.Equal(act, testObject.ActualBoolean);
+            Assert.Equal(names, testObject.Names);
+        }
+
+        [Theory]
+        [ClassData(typeof(TestAssert_InputProperties_Exception_Helper))]
+        public void TestAssert_InputProperties_Exception_Helper(List<string> exp, List<string> act, List<string> names, string message)
+        {
+            var exception = Assert.Throws<ArgumentException>(() => new Test(exp, act, names));
+            Assert.Equal(message, exception.Message);
+        }
+
+        [Theory]
+        [ClassData(typeof(TestAssertTrue_InputProperties_Exception_Helper))]
+        public void TestAssertTrue_InputProperties_Exception_Helper(List<bool> act, List<string> names, string message)
+        {
+            var exception = Assert.Throws<ArgumentException>(() => new Test(act, names));
+            Assert.Equal(message, exception.Message);
+        }
+
+        [Theory]
+        [ClassData(typeof(TestAssert_Result_Helper))]
+        public void TestAssert_Result_Helper(List<string> exp, List<string> act, List<string> names, List<string> result)
+        {
             Test testObject = new Test(exp, act, names);
 
-            Assert.False(testObject.Failed);
-            Assert.Equal(exp, testObject.Expected);
-            Assert.Equal(act, testObject.Actual);
-            Assert.Equal(names, testObject.Names);
-        }
-
-
-
-
-
-
-        [Fact]
-        public void TestFailingAssertTrue()
-        {
-            List<bool> act = new List<bool> { false };
-            List<string> names = new List<string> { "TestName" };
-
-            Test testObject = new Test(act, names);
-
-            Assert.True(testObject.Failed);
-            Assert.Equal(act, testObject.ActualBoolean);
-            Assert.Equal(names, testObject.Names);
-        }
-
-        [Fact]
-        public void TestPassingAssertTrue()
-        {
-            List<bool> act = new List<bool> { true };
-            List<string> names = new List<string> { "TestName" };
-
-            Test testObject = new Test(act, names);
-
-            Assert.False(testObject.Failed);
-            Assert.Equal(act, testObject.ActualBoolean);
-            Assert.Equal(names, testObject.Names);
+            Assert.Equal(result, testObject.Result);
         }
     }
 }
