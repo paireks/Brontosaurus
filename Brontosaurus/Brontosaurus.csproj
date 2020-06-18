@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertGH.cs" />
+    <Compile Include="AssertListGH.cs" />
     <Compile Include="AssertPointGH.cs" />
     <Compile Include="AssertTrueGH.cs" />
     <Compile Include="AssertVectorGH.cs" />
