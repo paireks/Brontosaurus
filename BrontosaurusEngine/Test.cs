@@ -8,21 +8,24 @@ namespace BrontosaurusEngine
 {
     public class Test
     {
+        private List<string> _result;
+        private List<string> _failedInfo;
+        private bool _failed;
         public Test(List<string> expected, List<string> actual, List<string> names)
         {
             Expected = expected;
             Actual = actual;
             Names = names;
             
-            Result = new List<string>();
-            FailedInfo = new List<string>();
+            _result = new List<string>();
+            _failedInfo = new List<string>();
 
             if (Expected.Count != Actual.Count || Expected.Count != Names.Count)
             {
                 throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
             }
 
-            Failed = false;
+            _failed = false;
 
             for (int i = 0; i < Actual.Count; i++)
             {
@@ -34,7 +37,7 @@ namespace BrontosaurusEngine
                 {
                     Result.Add(Names[i] + ";FAILED");
                     FailedInfo.Add(Names[i] + Environment.NewLine + "Test Failed: Expected != Actual" + Environment.NewLine + Expected[i] + " != " + Actual[i]);
-                    Failed = true;
+                    _failed = true;
                 }
             }
         }
@@ -45,15 +48,15 @@ namespace BrontosaurusEngine
             ActualBoolean = actual;
             Names = names;
 
-            Result = new List<string>();
-            FailedInfo = new List<string>();
+            _result = new List<string>();
+            _failedInfo = new List<string>();
 
             if (ActualBoolean.Count != Names.Count)
             {
                 throw new ArgumentException("Actual list should match names list - check if both lists have the same number of elements");
             }
 
-            Failed = false;
+            _failed = false;
 
             for (int i = 0; i < ActualBoolean.Count; i++)
             {
@@ -64,8 +67,8 @@ namespace BrontosaurusEngine
                 else
                 {
                     Result.Add(Names[i] + ";FAILED");
-                    FailedInfo.Add(Names[i] + Environment.NewLine + "Test Failed: True != Actual" + Environment.NewLine + "True" + " != " + ActualBoolean[i]);
-                    Failed = true;
+                    FailedInfo.Add(Names[i] + Environment.NewLine + "Test Failed: True != False");
+                    _failed = true;
                 }
             }
         }
@@ -74,8 +77,17 @@ namespace BrontosaurusEngine
         public List<bool> ActualBoolean { get; set; }
         public List<string> Actual { get; set; }
         public List<string> Names { get; set; }
-        public List<string> Result { get; set; }
-        public List<string> FailedInfo { get; set; }
-        public bool Failed { get; set; }
+        public List<string> Result
+        {
+            get { return _result; }
+        }
+        public List<string> FailedInfo
+        {
+            get { return _failedInfo; }
+        }
+        public bool Failed
+        {
+            get { return _failed; }
+        }
     }
 }
