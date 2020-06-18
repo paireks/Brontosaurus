@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.Geometry;
 
 namespace BrontosaurusEngine
 {
@@ -73,9 +74,111 @@ namespace BrontosaurusEngine
             }
         }
 
+        public Test(List<Point3d> expected, List<Point3d> actual, List<string> names)
+        {
+            ExpectedPoints = expected;
+            ActualPoints = actual;
+            Names = names;
+
+            _result = new List<string>();
+            _failedInfo = new List<string>();
+
+            string _failedString;
+
+            if (ExpectedPoints.Count != ActualPoints.Count || ExpectedPoints.Count != Names.Count)
+            {
+                throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
+            }
+
+            _failed = false;
+
+            for (int i = 0; i < ActualPoints.Count; i++)
+            {
+                if (ExpectedPoints[i] == ActualPoints[i])
+                {
+                    Result.Add(Names[i] + ";OK");
+                }
+                else
+                {
+                    _failedString = "";
+                    Result.Add(Names[i] + ";FAILED");
+                    if (ExpectedPoints[i].X.ToString() != ActualPoints[i].X.ToString())
+                    {
+                        _failedString += "Check X coordinate;" + Environment.NewLine;
+                    }
+                    if (ExpectedPoints[i].Y.ToString() != ActualPoints[i].Y.ToString())
+                    {
+                        _failedString += "Check Y coordinate;" + Environment.NewLine;
+                    }
+                    if (ExpectedPoints[i].Z.ToString() != ActualPoints[i].Z.ToString())
+                    {
+                        _failedString += "Check Z coordinate;" + Environment.NewLine;
+                    }
+                    FailedInfo.Add(Names[i]
+                                   + Environment.NewLine + "Test Failed: Expected != Actual"
+                                   + Environment.NewLine + ExpectedPoints[i] + " != " + ActualPoints[i]
+                                   + Environment.NewLine + _failedString);
+                    _failed = true;
+                }
+            }
+        }
+
+        public Test(List<Vector3d> expected, List<Vector3d> actual, List<string> names)
+        {
+            ExpectedVectors = expected;
+            ActualVectors = actual;
+            Names = names;
+
+            _result = new List<string>();
+            _failedInfo = new List<string>();
+
+            string _failedString;
+
+            if (ExpectedVectors.Count != ActualVectors.Count || ExpectedVectors.Count != Names.Count)
+            {
+                throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
+            }
+
+            _failed = false;
+
+            for (int i = 0; i < ActualVectors.Count; i++)
+            {
+                if (ExpectedVectors[i] == ActualVectors[i])
+                {
+                    Result.Add(Names[i] + ";OK");
+                }
+                else
+                {
+                    _failedString = "";
+                    Result.Add(Names[i] + ";FAILED");
+                    if (ExpectedVectors[i].X.ToString() != ActualVectors[i].X.ToString())
+                    {
+                        _failedString += "Check X direction;" + Environment.NewLine;
+                    }
+                    if (ExpectedVectors[i].Y.ToString() != ActualVectors[i].Y.ToString())
+                    {
+                        _failedString += "Check Y direction;" + Environment.NewLine;
+                    }
+                    if (ExpectedVectors[i].Z.ToString() != ActualVectors[i].Z.ToString())
+                    {
+                        _failedString += "Check Z direction;" + Environment.NewLine;
+                    }
+                    FailedInfo.Add(Names[i]
+                                   + Environment.NewLine + "Test Failed: Expected != Actual"
+                                   + Environment.NewLine + ExpectedVectors[i] + " != " + ActualVectors[i]
+                                   + Environment.NewLine + _failedString);
+                    _failed = true;
+                }
+            }
+        }
+
         public List<string> Expected { get; set; }
+        public List<Point3d> ExpectedPoints { get; set; }
+        public List<Vector3d> ExpectedVectors { get; set; }
         public List<bool> ActualBoolean { get; set; }
         public List<string> Actual { get; set; }
+        public List<Point3d> ActualPoints { get; set; }
+        public List<Vector3d> ActualVectors { get; set; }
         public List<string> Names { get; set; }
         public List<string> Result
         {
