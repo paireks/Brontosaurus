@@ -82,7 +82,7 @@ namespace Brontosaurus
         }
         public override Guid ComponentGuid
         {
-            get { return new Guid("dd744886-bd7f-4f1a-9d78-443f878533f6"); }
+            get { return new Guid("dd744886-bd7f-4f1a-9d78-443f878533f0"); }
         }
     }
 }

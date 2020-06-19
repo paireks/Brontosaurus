@@ -49,7 +49,6 @@ namespace BrontosaurusEngine
                            + Environment.NewLine + "Tests failed: " + _failedCounter;
 
             _reportPart = _totalResult + Environment.NewLine + _reportPart;
-
         }
 
         public List<string> Results { get; set; }

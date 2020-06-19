@@ -61,7 +61,7 @@ namespace BrontosaurusTests
         [Fact]
         public void TestGuid()
         {
-            Guid expected = new Guid("dd744886-bd7f-4f1a-9d78-443f878533f6");
+            Guid expected = new Guid("dd744886-bd7f-4f1a-9d78-443f878533f0");
             Guid actual = TestAssertVectorListGhHelper.TestObject.ComponentGuid;
 
             Assert.Equal(expected, actual);
