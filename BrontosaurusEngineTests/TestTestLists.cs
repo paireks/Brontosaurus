@@ -75,5 +75,39 @@ namespace BrontosaurusEngineTests
             TestLists testObject = new TestLists(exp, act, name);
             Assert.Equal(failed, testObject.Failed);
         }
+
+        // ---------- Assert point lists tests ----------
+
+        [Theory]
+        [ClassData(typeof(TestAssertPointList_InputProperties_Helper))]
+        public void TestAssertPointList_InputProperties_Helper(List<Point3d> exp, List<Point3d> act, string name)
+        {
+            TestLists testObject = new TestLists(exp, act, name);
+
+            Assert.Equal(exp, testObject.ExpectedPointList);
+            Assert.Equal(act, testObject.ActualPointList);
+            Assert.Equal(name, testObject.Name);
+        }
+        [Theory]
+        [ClassData(typeof(TestAssertPointList_Result_Helper))]
+        public void TestAssertPointList_Result_Helper(List<Point3d> exp, List<Point3d> act, string name, string result)
+        {
+            TestLists testObject = new TestLists(exp, act, name);
+            Assert.Equal(result, testObject.Result);
+        }
+        [Theory]
+        [ClassData(typeof(TestAssertPointList_FailedInfo_Helper))]
+        public void TestAssertPointList_FailedInfo_Helper(List<Point3d> exp, List<Point3d> act, string name, List<string> failedInfo)
+        {
+            TestLists testObject = new TestLists(exp, act, name);
+            Assert.Equal(failedInfo, testObject.FailedInfo);
+        }
+        [Theory]
+        [ClassData(typeof(TestAssertPointList_Failed_Helper))]
+        public void TestAssertPointList_Failed_Helper(List<Point3d> exp, List<Point3d> act, string name, bool failed)
+        {
+            TestLists testObject = new TestLists(exp, act, name);
+            Assert.Equal(failed, testObject.Failed);
+        }
     }
 }
