@@ -61,8 +61,10 @@
     <Compile Include="AssertGH.cs" />
     <Compile Include="AssertListGH.cs" />
     <Compile Include="AssertPointGH.cs" />
+    <Compile Include="AssertPointListGH.cs" />
     <Compile Include="AssertTrueGH.cs" />
     <Compile Include="AssertVectorGH.cs" />
+    <Compile Include="AssertVectorListGH.cs" />
     <Compile Include="BrontosaurusInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

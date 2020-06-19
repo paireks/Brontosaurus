@@ -9,57 +9,57 @@ using BrontosaurusEngine;
 
 namespace Brontosaurus
 {
-    public class AssertVectorGH : GH_Component
+    public class AssertVectorListGH : GH_Component
     {
         private bool _testsFailed;
         private bool _unusedComponent = true;
-        public AssertVectorGH()
-          : base("Assert Vector", "Assert Vector",
-              "If your actual vector == expected vector: component will pass the test.",
+        public AssertVectorListGH()
+          : base("Assert Vector List", "Assert Vector List",
+              "This component will treat testing your whole list as one test with one result." +
+              " If your actual list == expected list: component will pass the test.",
               "Brontosaurus", "Assert Geo")
         {
         }
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Test Names",
-                "Test Names",
-                "Test names as list, so it'll be easier to check which test passed/failed." +
-                " Every name should match every assert (expected and actual value)",
+            pManager.AddTextParameter("Test Name",
+                "Test Name",
+                "One test name for whole test",
+                GH_ParamAccess.item);
+            pManager.AddVectorParameter("Expected Vector List",
+                "Expected Vector List",
+                "Expected list of vectors",
                 GH_ParamAccess.list);
-            pManager.AddVectorParameter("Expected",
-                "Expected",
-                "Expected vectors as list",
-                GH_ParamAccess.list);
-            pManager.AddVectorParameter("Actual",
-                "Actual",
-                "Actual vectors that you want to check, as list",
+            pManager.AddVectorParameter("Actual Vector List",
+                "Actual Vector List",
+                "Actual list of vectors",
                 GH_ParamAccess.list);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Result", "Result", "Result of tests",
-                GH_ParamAccess.list);
-            pManager.AddTextParameter("Failed Info", "Failed Info", "Information about failed tests",
+            pManager.AddTextParameter("Result", "Result", "Result of test",
+                GH_ParamAccess.item);
+            pManager.AddTextParameter("Failed Info", "Failed Info", "Information about failed test",
                 GH_ParamAccess.list);
         }
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<string> names = new List<string>();
+            string name = "";
             List<Vector3d> actual = new List<Vector3d>();
             List<Vector3d> expected = new List<Vector3d>();
 
-            DA.GetDataList(0, names);
+            DA.GetData(0, ref name);
             DA.GetDataList(1, actual);
             DA.GetDataList(2, expected);
 
             DestroyIconCache();
 
-            Test testObject = new Test(expected, actual, names);
+            TestLists testObject = new TestLists(expected, actual, name);
 
             _testsFailed = testObject.Failed;
             _unusedComponent = false;
 
-            DA.SetDataList(0, testObject.Result);
+            DA.SetData(0, testObject.Result);
             DA.SetDataList(1, testObject.FailedInfo);
         }
         protected override System.Drawing.Bitmap Icon
@@ -76,13 +76,13 @@ namespace Brontosaurus
                 }
                 else
                 {
-                    return Properties.Resources.AssertVector;
+                    return Properties.Resources.AssertVectors;
                 }
             }
         }
         public override Guid ComponentGuid
         {
-            get { return new Guid("ac7cf21c-1c54-47e1-8fe0-b69c9135deff"); }
+            get { return new Guid("dd744886-bd7f-4f1a-9d78-443f878533f6"); }
         }
     }
 }
