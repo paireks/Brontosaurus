@@ -14,7 +14,7 @@ namespace BrontosaurusEngine
         private int _failedCounter;
         private float _passedPercent;
         private string _totalResult;
-        private bool _allTestPassed;
+        private bool _allTestsPassed;
         private string _reportPart;
 
         public Total(List<string> results)
@@ -23,7 +23,7 @@ namespace BrontosaurusEngine
 
             _passedCounter = 0;
             _failedCounter = 0;
-            _allTestPassed = true;
+            _allTestsPassed = true;
             _reportPart = "| Name | Result |" + Environment.NewLine + "| :---: | :---: |" + Environment.NewLine;
 
             foreach (var i in Results)
@@ -38,7 +38,7 @@ namespace BrontosaurusEngine
                 else
                 {
                     _failedCounter++;
-                    _allTestPassed = false;
+                    _allTestsPassed = false;
                     _reportPart += "| " + parts[0] + " | <span style=\"color: red\">" + parts[1] + "</span> |" + Environment.NewLine;
                 }
             }
@@ -73,9 +73,9 @@ namespace BrontosaurusEngine
             get { return _totalResult; }
         }
 
-        public bool AllTestPassed
+        public bool AllTestsPassed
         {
-            get { return _allTestPassed; }
+            get { return _allTestsPassed; }
         }
 
         public string ReportPart

@@ -42,7 +42,7 @@ namespace Brontosaurus
 
             Total totalObject = new Total(results);
 
-            _testsPassed = totalObject.AllTestPassed;
+            _testsPassed = totalObject.AllTestsPassed;
             _unusedComponent = false;
 
             DA.SetData(0, totalObject.TotalResult);
