@@ -80,9 +80,9 @@ namespace BrontosaurusEngineTests
 
         [Theory]
         [ClassData(typeof(TestAssertPointList_InputProperties_Helper))]
-        public void TestAssertPointList_InputProperties_Helper(List<Point3d> exp, List<Point3d> act, string name)
+        public void TestAssertPointList_InputProperties_Helper(List<Point3d> exp, List<Point3d> act, string name, double tolerance)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
 
             Assert.Equal(exp, testObject.ExpectedPointList);
             Assert.Equal(act, testObject.ActualPointList);
@@ -90,23 +90,25 @@ namespace BrontosaurusEngineTests
         }
         [Theory]
         [ClassData(typeof(TestAssertPointList_Result_Helper))]
-        public void TestAssertPointList_Result_Helper(List<Point3d> exp, List<Point3d> act, string name, string result)
+        public void TestAssertPointList_Result_Helper(List<Point3d> exp, List<Point3d> act, string name, double tolerance, string result)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(result, testObject.Result);
         }
         [Theory]
         [ClassData(typeof(TestAssertPointList_FailedInfo_Helper))]
-        public void TestAssertPointList_FailedInfo_Helper(List<Point3d> exp, List<Point3d> act, string name, List<string> failedInfo)
+        public void TestAssertPointList_FailedInfo_Helper(List<Point3d> exp, List<Point3d> act, string name,
+            double tolerance, List<string> failedInfo)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(failedInfo, testObject.FailedInfo);
         }
         [Theory]
         [ClassData(typeof(TestAssertPointList_Failed_Helper))]
-        public void TestAssertPointList_Failed_Helper(List<Point3d> exp, List<Point3d> act, string name, bool failed)
+        public void TestAssertPointList_Failed_Helper(List<Point3d> exp, List<Point3d> act, string name,
+            double tolerance, bool failed)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(failed, testObject.Failed);
         }
     }

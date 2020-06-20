@@ -85,39 +85,40 @@ namespace BrontosaurusEngine
             _failedInfo = new List<string>();
 
             string _failedString;
+            bool _failedCurrent;
 
             if (ExpectedPoints.Count != ActualPoints.Count || ExpectedPoints.Count != Names.Count)
             {
                 throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
             }
-
+            _failed = false;
             for (int i = 0; i < ActualPoints.Count; i++)
             {
-                _failed = false;
-
                 _failedString = "";
+                _failedCurrent = false;
                 if (Math.Abs(ExpectedPoints[i].X - ActualPoints[i].X) > Tolerance)
                 {
                     _failedString += "Check X coordinate;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
                 if (Math.Abs(ExpectedPoints[i].Y - ActualPoints[i].Y) > Tolerance)
                 {
                     _failedString += "Check Y coordinate;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
                 if (Math.Abs(ExpectedPoints[i].Z - ActualPoints[i].Z) > Tolerance)
                 {
                     _failedString += "Check Z coordinate;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
-                if (_failed)
+                if (_failedCurrent)
                 {
                     Result.Add(Names[i] + ";FAILED");
                     FailedInfo.Add(Names[i]
                                    + Environment.NewLine + "Test Failed: Expected != Actual"
                                    + Environment.NewLine + ExpectedPoints[i] + " != " + ActualPoints[i]
                                    + Environment.NewLine + _failedString);
+                    _failed = true;
                 }
                 else
                 {
@@ -137,39 +138,40 @@ namespace BrontosaurusEngine
             _failedInfo = new List<string>();
 
             string _failedString;
+            bool _failedCurrent;
 
             if (ExpectedVectors.Count != ActualVectors.Count || ExpectedVectors.Count != Names.Count)
             {
                 throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
             }
-
+            _failed = false;
             for (int i = 0; i < ActualVectors.Count; i++)
             {
-                _failed = false;
-
                 _failedString = "";
+                _failedCurrent = false;
                 if (Math.Abs(ExpectedVectors[i].X - ActualVectors[i].X) > Tolerance)
                 {
                     _failedString += "Check X direction;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
                 if (Math.Abs(ExpectedVectors[i].Y - ActualVectors[i].Y) > Tolerance)
                 {
                     _failedString += "Check Y direction;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
                 if (Math.Abs(ExpectedVectors[i].Z - ActualVectors[i].Z) > Tolerance)
                 {
                     _failedString += "Check Z direction;" + Environment.NewLine;
-                    _failed = true;
+                    _failedCurrent = true;
                 }
-                if (_failed)
+                if (_failedCurrent)
                 {
                     Result.Add(Names[i] + ";FAILED");
                     FailedInfo.Add(Names[i]
                                    + Environment.NewLine + "Test Failed: Expected != Actual"
                                    + Environment.NewLine + ExpectedVectors[i] + " != " + ActualVectors[i]
                                    + Environment.NewLine + _failedString);
+                    _failed = true;
                 }
                 else
                 {

@@ -106,17 +106,19 @@ namespace BrontosaurusEngine
                 _result = Name + ";OK";
             }
         }
-        public TestLists(List<Point3d> expectedList, List<Point3d> actualList, string name)
+        public TestLists(List<Point3d> expectedList, List<Point3d> actualList, string name, double tolerance)
         {
             ExpectedPointList = expectedList;
             ActualPointList = actualList;
             Name = name;
+            Tolerance = tolerance;
 
             _failedInfo = new List<string>();
 
             _failed = false;
 
             string _failedString;
+            bool _failedCurrent;
 
             if (ExpectedPointList.Count != ActualPointList.Count)
             {
@@ -128,27 +130,36 @@ namespace BrontosaurusEngine
             }
             else
             {
+
                 for (int i = 0; i < ActualPointList.Count; i++)
                 {
+                    _failedCurrent = false;
+
                     _failedString = "";
-                    if (ExpectedPointList[i] != ActualPointList[i])
+
+                    if (Math.Abs(ExpectedPointList[i].X - ActualPointList[i].X) > Tolerance)
                     {
-                        if (ExpectedPointList[i].X.ToString() != ActualPointList[i].X.ToString())
-                        {
-                            _failedString += "Check X coordinate;" + Environment.NewLine;
-                        }
-                        if (ExpectedPointList[i].Y.ToString() != ActualPointList[i].Y.ToString())
-                        {
-                            _failedString += "Check Y coordinate;" + Environment.NewLine;
-                        }
-                        if (ExpectedPointList[i].Z.ToString() != ActualPointList[i].Z.ToString())
-                        {
-                            _failedString += "Check Z coordinate;" + Environment.NewLine;
-                        }
-                        _failedInfo.Add("Check element " + i.ToString()
-                                                         + Environment.NewLine + ExpectedPointList[i] + " != " + ActualPointList[i]
-                                                         + Environment.NewLine + _failedString);
+                        _failedString += "Check X coordinate;" + Environment.NewLine;
+                        _failedCurrent = true;
                         _failed = true;
+                    }
+                    if (Math.Abs(ExpectedPointList[i].Y - ActualPointList[i].Y) > Tolerance)
+                    {
+                        _failedString += "Check Y coordinate;" + Environment.NewLine;
+                        _failedCurrent = true;
+                        _failed = true;
+                    }
+                    if (Math.Abs(ExpectedPointList[i].Z - ActualPointList[i].Z) > Tolerance)
+                    {
+                        _failedString += "Check Z coordinate;" + Environment.NewLine;
+                        _failedCurrent = true;
+                        _failed = true;
+                    }
+                    if (_failedCurrent)
+                    {
+                        _failedInfo.Add("Check element " + i.ToString()
+                                        + Environment.NewLine + ExpectedPointList[i] + " != " + ActualPointList[i]
+                                        + Environment.NewLine + _failedString);
                     }
                 }
             }
@@ -161,6 +172,7 @@ namespace BrontosaurusEngine
                 _result = Name + ";OK";
             }
         }
+        public double Tolerance { get; set; }
         public List<string> ExpectedList { get; set; }
         public List<Vector3d> ExpectedVectorList { get; set; }
         public List<Point3d> ExpectedPointList { get; set; }
