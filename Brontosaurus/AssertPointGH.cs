@@ -34,6 +34,10 @@ namespace Brontosaurus
                 "Actual",
                 "Actual points that you want to check, as list",
                 GH_ParamAccess.list);
+            pManager.AddNumberParameter("Tolerance",
+                "Tolerance",
+                "Tolerance - limit distance, to check if actual point is close enough to expected",
+                GH_ParamAccess.item);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
@@ -47,14 +51,16 @@ namespace Brontosaurus
             List<string> names = new List<string>();
             List<Point3d> actual = new List<Point3d>();
             List<Point3d> expected = new List<Point3d>();
+            double tolerance = 0.0;
 
             DA.GetDataList(0, names);
             DA.GetDataList(1, actual);
             DA.GetDataList(2, expected);
+            DA.GetData(3, ref tolerance);
 
             DestroyIconCache();
 
-            Test testObject = new Test(expected, actual, names);
+            Test testObject = new Test(expected, actual, names, tolerance);
 
             _testsFailed = testObject.Failed;
             _unusedComponent = false;

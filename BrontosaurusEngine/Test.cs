@@ -74,11 +74,12 @@ namespace BrontosaurusEngine
             }
         }
 
-        public Test(List<Point3d> expected, List<Point3d> actual, List<string> names)
+        public Test(List<Point3d> expected, List<Point3d> actual, List<string> names, double tolerance)
         {
             ExpectedPoints = expected;
             ActualPoints = actual;
             Names = names;
+            Tolerance = tolerance;
 
             _result = new List<string>();
             _failedInfo = new List<string>();
@@ -90,44 +91,47 @@ namespace BrontosaurusEngine
                 throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
             }
 
-            _failed = false;
-
             for (int i = 0; i < ActualPoints.Count; i++)
             {
-                if (ExpectedPoints[i] == ActualPoints[i])
+                _failed = false;
+
+                _failedString = "";
+                if (Math.Abs(ExpectedPoints[i].X - ActualPoints[i].X) > Tolerance)
                 {
-                    Result.Add(Names[i] + ";OK");
+                    _failedString += "Check X coordinate;" + Environment.NewLine;
+                    _failed = true;
                 }
-                else
+                if (Math.Abs(ExpectedPoints[i].Y - ActualPoints[i].Y) > Tolerance)
                 {
-                    _failedString = "";
+                    _failedString += "Check Y coordinate;" + Environment.NewLine;
+                    _failed = true;
+                }
+                if (Math.Abs(ExpectedPoints[i].Z - ActualPoints[i].Z) > Tolerance)
+                {
+                    _failedString += "Check Z coordinate;" + Environment.NewLine;
+                    _failed = true;
+                }
+                if (_failed)
+                {
                     Result.Add(Names[i] + ";FAILED");
-                    if (ExpectedPoints[i].X.ToString() != ActualPoints[i].X.ToString())
-                    {
-                        _failedString += "Check X coordinate;" + Environment.NewLine;
-                    }
-                    if (ExpectedPoints[i].Y.ToString() != ActualPoints[i].Y.ToString())
-                    {
-                        _failedString += "Check Y coordinate;" + Environment.NewLine;
-                    }
-                    if (ExpectedPoints[i].Z.ToString() != ActualPoints[i].Z.ToString())
-                    {
-                        _failedString += "Check Z coordinate;" + Environment.NewLine;
-                    }
                     FailedInfo.Add(Names[i]
                                    + Environment.NewLine + "Test Failed: Expected != Actual"
                                    + Environment.NewLine + ExpectedPoints[i] + " != " + ActualPoints[i]
                                    + Environment.NewLine + _failedString);
-                    _failed = true;
+                }
+                else
+                {
+                    Result.Add(Names[i] + ";OK");
                 }
             }
         }
 
-        public Test(List<Vector3d> expected, List<Vector3d> actual, List<string> names)
+        public Test(List<Vector3d> expected, List<Vector3d> actual, List<string> names, double tolerance)
         {
             ExpectedVectors = expected;
             ActualVectors = actual;
             Names = names;
+            Tolerance = tolerance;
 
             _result = new List<string>();
             _failedInfo = new List<string>();
@@ -139,39 +143,41 @@ namespace BrontosaurusEngine
                 throw new ArgumentException("Expected list should match actual and names - check if all three lists have the same number of elements");
             }
 
-            _failed = false;
-
             for (int i = 0; i < ActualVectors.Count; i++)
             {
-                if (ExpectedVectors[i] == ActualVectors[i])
+                _failed = false;
+
+                _failedString = "";
+                if (Math.Abs(ExpectedVectors[i].X - ActualVectors[i].X) > Tolerance)
                 {
-                    Result.Add(Names[i] + ";OK");
+                    _failedString += "Check X direction;" + Environment.NewLine;
+                    _failed = true;
                 }
-                else
+                if (Math.Abs(ExpectedVectors[i].Y - ActualVectors[i].Y) > Tolerance)
                 {
-                    _failedString = "";
+                    _failedString += "Check Y direction;" + Environment.NewLine;
+                    _failed = true;
+                }
+                if (Math.Abs(ExpectedVectors[i].Z - ActualVectors[i].Z) > Tolerance)
+                {
+                    _failedString += "Check Z direction;" + Environment.NewLine;
+                    _failed = true;
+                }
+                if (_failed)
+                {
                     Result.Add(Names[i] + ";FAILED");
-                    if (ExpectedVectors[i].X.ToString() != ActualVectors[i].X.ToString())
-                    {
-                        _failedString += "Check X direction;" + Environment.NewLine;
-                    }
-                    if (ExpectedVectors[i].Y.ToString() != ActualVectors[i].Y.ToString())
-                    {
-                        _failedString += "Check Y direction;" + Environment.NewLine;
-                    }
-                    if (ExpectedVectors[i].Z.ToString() != ActualVectors[i].Z.ToString())
-                    {
-                        _failedString += "Check Z direction;" + Environment.NewLine;
-                    }
                     FailedInfo.Add(Names[i]
                                    + Environment.NewLine + "Test Failed: Expected != Actual"
                                    + Environment.NewLine + ExpectedVectors[i] + " != " + ActualVectors[i]
                                    + Environment.NewLine + _failedString);
-                    _failed = true;
+                }
+                else
+                {
+                    Result.Add(Names[i] + ";OK");
                 }
             }
         }
-
+        public double Tolerance { get; set; }
         public List<string> Expected { get; set; }
         public List<Point3d> ExpectedPoints { get; set; }
         public List<Vector3d> ExpectedVectors { get; set; }
