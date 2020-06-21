@@ -1,5 +1,9 @@
 # Brontosaurus
 
+<p align="center">
+  <img width="100" height="100" src="https://github.com/paireks/Brontosaurus/blob/master/Images/brontosaurus_100px.png">
+</p>
+
 ## Purpose
 
 Brontosaurus is an open-source plug-in for Grasshopper (Rhino 6) created for the purpose of generating unit tests inside Grasshopper.
