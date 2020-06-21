@@ -36,6 +36,8 @@ namespace BrontosaurusTests
         [InlineData(0, "Test Name", "Test Name", "One test name for whole test", GH_ParamAccess.item)]
         [InlineData(1, "Expected Point List", "Expected Point List", "Expected list of points", GH_ParamAccess.list)]
         [InlineData(2, "Actual Point List", "Actual Point List", "Actual list of points", GH_ParamAccess.list)]
+        [InlineData(3, "Tolerance", "Tolerance", "Tolerance - limit distance, to check if actual point is close enough to expected",
+            GH_ParamAccess.item)]
 
         public void TestRegisterInputParams(int id, string name, string nickname,
             string description, GH_ParamAccess access)

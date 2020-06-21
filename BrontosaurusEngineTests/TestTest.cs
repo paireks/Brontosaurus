@@ -158,6 +158,7 @@ namespace BrontosaurusEngineTests
             Assert.Equal(exp, testObject.ExpectedVectors);
             Assert.Equal(act, testObject.ActualVectors);
             Assert.Equal(names, testObject.Names);
+            Assert.Equal(tolerance, testObject.Tolerance);
         }
 
         [Theory]

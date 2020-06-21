@@ -36,7 +36,7 @@ namespace Brontosaurus
                 GH_ParamAccess.list);
             pManager.AddNumberParameter("Tolerance",
                 "Tolerance",
-                "Tolerance - limit distance, to check if actual point is close enough to expected",
+                "Tolerance - limit distance, to check if actual vector is close enough to expected",
                 GH_ParamAccess.item);
         }
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)

@@ -38,6 +38,10 @@ namespace BrontosaurusTests
             GH_ParamAccess.list)]
         [InlineData(1, "Expected", "Expected", "Expected vectors as list", GH_ParamAccess.list)]
         [InlineData(2, "Actual", "Actual", "Actual vectors that you want to check, as list", GH_ParamAccess.list)]
+        [InlineData(3, "Tolerance",
+            "Tolerance",
+            "Tolerance - limit distance, to check if actual vector is close enough to expected",
+            GH_ParamAccess.item)]
 
         public void TestRegisterInputParams(int id, string name, string nickname,
             string description, GH_ParamAccess access)

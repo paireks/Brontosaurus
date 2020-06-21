@@ -51,17 +51,19 @@ namespace BrontosaurusEngine
                 _result = Name + ";OK";
             }
         }
-        public TestLists(List<Vector3d> expectedList, List<Vector3d> actualList, string name)
+        public TestLists(List<Vector3d> expectedList, List<Vector3d> actualList, string name, double tolerance)
         {
             ExpectedVectorList = expectedList;
             ActualVectorList = actualList;
             Name = name;
+            Tolerance = tolerance;
 
             _failedInfo = new List<string>();
 
             _failed = false;
 
             string _failedString;
+            bool _failedCurrent;
 
             if (ExpectedVectorList.Count != ActualVectorList.Count)
             {
@@ -73,27 +75,36 @@ namespace BrontosaurusEngine
             }
             else
             {
+
                 for (int i = 0; i < ActualVectorList.Count; i++)
                 {
+                    _failedCurrent = false;
+
                     _failedString = "";
-                    if (ExpectedVectorList[i] != ActualVectorList[i])
+
+                    if (Math.Abs(ExpectedVectorList[i].X - ActualVectorList[i].X) > Tolerance)
                     {
-                        if (ExpectedVectorList[i].X.ToString() != ActualVectorList[i].X.ToString())
-                        {
-                            _failedString += "Check X direction;" + Environment.NewLine;
-                        }
-                        if (ExpectedVectorList[i].Y.ToString() != ActualVectorList[i].Y.ToString())
-                        {
-                            _failedString += "Check Y direction;" + Environment.NewLine;
-                        }
-                        if (ExpectedVectorList[i].Z.ToString() != ActualVectorList[i].Z.ToString())
-                        {
-                            _failedString += "Check Z direction;" + Environment.NewLine;
-                        }
-                        _failedInfo.Add("Check element " + i.ToString()
-                                                         + Environment.NewLine + ExpectedVectorList[i] + " != " + ActualVectorList[i]
-                                                         + Environment.NewLine + _failedString);
+                        _failedString += "Check X direction;" + Environment.NewLine;
+                        _failedCurrent = true;
                         _failed = true;
+                    }
+                    if (Math.Abs(ExpectedVectorList[i].Y - ActualVectorList[i].Y) > Tolerance)
+                    {
+                        _failedString += "Check Y direction;" + Environment.NewLine;
+                        _failedCurrent = true;
+                        _failed = true;
+                    }
+                    if (Math.Abs(ExpectedVectorList[i].Z - ActualVectorList[i].Z) > Tolerance)
+                    {
+                        _failedString += "Check Z direction;" + Environment.NewLine;
+                        _failedCurrent = true;
+                        _failed = true;
+                    }
+                    if (_failedCurrent)
+                    {
+                        _failedInfo.Add("Check element " + i.ToString()
+                                        + Environment.NewLine + ExpectedVectorList[i] + " != " + ActualVectorList[i]
+                                        + Environment.NewLine + _failedString);
                     }
                 }
             }

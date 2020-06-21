@@ -46,33 +46,36 @@ namespace BrontosaurusEngineTests
 
         [Theory]
         [ClassData(typeof(TestAssertVectorList_InputProperties_Helper))]
-        public void TestAssertVectorList_InputProperties_Helper(List<Vector3d> exp, List<Vector3d> act, string name)
+        public void TestAssertVectorList_InputProperties_Helper(List<Vector3d> exp, List<Vector3d> act, string name, double tolerance)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
 
             Assert.Equal(exp, testObject.ExpectedVectorList);
             Assert.Equal(act, testObject.ActualVectorList);
             Assert.Equal(name, testObject.Name);
+            Assert.Equal(tolerance, testObject.Tolerance);
         }
         [Theory]
         [ClassData(typeof(TestAssertVectorList_Result_Helper))]
-        public void TestAssertVectorList_Result_Helper(List<Vector3d> exp, List<Vector3d> act, string name, string result)
+        public void TestAssertVectorList_Result_Helper(List<Vector3d> exp, List<Vector3d> act, string name, double tolerance, string result)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(result, testObject.Result);
         }
         [Theory]
         [ClassData(typeof(TestAssertVectorList_FailedInfo_Helper))]
-        public void TestAssertVectorList_FailedInfo_Helper(List<Vector3d> exp, List<Vector3d> act, string name, List<string> failedInfo)
+        public void TestAssertVectorList_FailedInfo_Helper(List<Vector3d> exp, List<Vector3d> act, string name,
+            double tolerance, List<string> failedInfo)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(failedInfo, testObject.FailedInfo);
         }
         [Theory]
         [ClassData(typeof(TestAssertVectorList_Failed_Helper))]
-        public void TestAssertVectorList_Failed_Helper(List<Vector3d> exp, List<Vector3d> act, string name, bool failed)
+        public void TestAssertVectorList_Failed_Helper(List<Vector3d> exp, List<Vector3d> act, string name,
+            double tolerance, bool failed)
         {
-            TestLists testObject = new TestLists(exp, act, name);
+            TestLists testObject = new TestLists(exp, act, name, tolerance);
             Assert.Equal(failed, testObject.Failed);
         }
 
@@ -87,6 +90,7 @@ namespace BrontosaurusEngineTests
             Assert.Equal(exp, testObject.ExpectedPointList);
             Assert.Equal(act, testObject.ActualPointList);
             Assert.Equal(name, testObject.Name);
+            Assert.Equal(tolerance, testObject.Tolerance);
         }
         [Theory]
         [ClassData(typeof(TestAssertPointList_Result_Helper))]
