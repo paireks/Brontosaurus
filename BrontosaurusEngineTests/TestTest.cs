@@ -12,8 +12,8 @@ namespace BrontosaurusEngineTests
         // ---------- Assert tests ----------
 
         [Theory]
-        [ClassData(typeof(TestAssert_InputProperties_Helper))]
-        public void TestAssert_InputProperties_Helper(List<string> exp, List<string> act, List<string> names)
+        [ClassData(typeof(TestAssert_InputProperties))]
+        public void TestAssert_InputProperties(List<string> exp, List<string> act, List<string> names)
         {
             Test testObject = new Test(exp, act, names);
 
@@ -23,32 +23,32 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssert_InputProperties_Exception_Helper))]
-        public void TestAssert_InputProperties_Exception_Helper(List<string> exp, List<string> act, List<string> names, string message)
+        [ClassData(typeof(TestAssert_InputProperties_Exception))]
+        public void TestAssert_InputProperties_Exception(List<string> exp, List<string> act, List<string> names, string message)
         {
             var exception = Assert.Throws<ArgumentException>(() => new Test(exp, act, names));
             Assert.Equal(message, exception.Message);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssert_Result_Helper))]
-        public void TestAssert_Result_Helper(List<string> exp, List<string> act, List<string> names, List<string> result)
+        [ClassData(typeof(TestAssert_Result))]
+        public void TestAssert_Result(List<string> exp, List<string> act, List<string> names, List<string> result)
         {
             Test testObject = new Test(exp, act, names);
             Assert.Equal(result, testObject.Result);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssert_FailedInfo_Helper))]
-        public void TestAssert_FailedInfo_Helper(List<string> exp, List<string> act, List<string> names, List<string> failedInfo)
+        [ClassData(typeof(TestAssert_FailedInfo))]
+        public void TestAssert_FailedInfo(List<string> exp, List<string> act, List<string> names, List<string> failedInfo)
         {
             Test testObject = new Test(exp, act, names);
             Assert.Equal(failedInfo, testObject.FailedInfo);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssert_Failed_Helper))]
-        public void TestAssert_Failed_Helper(List<string> exp, List<string> act, List<string> names, bool failed)
+        [ClassData(typeof(TestAssert_Failed))]
+        public void TestAssert_Failed(List<string> exp, List<string> act, List<string> names, bool failed)
         {
             Test testObject = new Test(exp, act, names);
             Assert.Equal(failed, testObject.Failed);
@@ -57,8 +57,8 @@ namespace BrontosaurusEngineTests
         // ---------- AssertTrue tests ----------
 
         [Theory]
-        [ClassData(typeof(TestAssertTrue_InputProperties_Helper))]
-        public void TestAssertTrue_InputProperties_Helper(List<bool> act, List<string> names)
+        [ClassData(typeof(TestAssertTrue_InputProperties))]
+        public void TestAssertTrue_InputProperties(List<bool> act, List<string> names)
         {
             Test testObject = new Test(act, names);
 
@@ -67,32 +67,32 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertTrue_InputProperties_Exception_Helper))]
-        public void TestAssertTrue_InputProperties_Exception_Helper(List<bool> act, List<string> names, string message)
+        [ClassData(typeof(TestAssertTrue_InputProperties_Exception))]
+        public void TestAssertTrue_InputProperties_Exception(List<bool> act, List<string> names, string message)
         {
             var exception = Assert.Throws<ArgumentException>(() => new Test(act, names));
             Assert.Equal(message, exception.Message);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertTrue_Result_Helper))]
-        public void TestAssertTrue_Result_Helper(List<bool> act, List<string> names, List<string> result)
+        [ClassData(typeof(TestAssertTrue_Result))]
+        public void TestAssertTrue_Result(List<bool> act, List<string> names, List<string> result)
         {
             Test testObject = new Test(act, names);
             Assert.Equal(result, testObject.Result);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertTrue_Failed_Helper))]
-        public void TestAssertTrue_Failed_Helper(List<bool> act, List<string> names, bool failed)
+        [ClassData(typeof(TestAssertTrue_Failed))]
+        public void TestAssertTrue_Failed(List<bool> act, List<string> names, bool failed)
         {
             Test testObject = new Test(act, names);
             Assert.Equal(failed, testObject.Failed);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertTrue_FailedInfo_Helper))]
-        public void TestAssertTrue_FailedInfo_Helper(List<bool> act, List<string> names, List<string> failedInfo)
+        [ClassData(typeof(TestAssertTrue_FailedInfo))]
+        public void TestAssertTrue_FailedInfo(List<bool> act, List<string> names, List<string> failedInfo)
         {
             Test testObject = new Test(act, names);
             Assert.Equal(failedInfo, testObject.FailedInfo);
@@ -101,8 +101,8 @@ namespace BrontosaurusEngineTests
         // ---------- AssertPoint tests ----------
 
         [Theory]
-        [ClassData(typeof(TestAssertPoint_InputProperties_Helper))]
-        public void TestAssertPoint_InputProperties_Helper(List<Point3d> exp, List<Point3d> act, List<string> names, double tolerance)
+        [ClassData(typeof(TestAssertPoint_InputProperties))]
+        public void TestAssertPoint_InputProperties(List<Point3d> exp, List<Point3d> act, List<string> names, double tolerance)
         {
             Test testObject = new Test(exp, act, names, tolerance);
 
@@ -113,8 +113,8 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertPoint_InputProperties_Exception_Helper))]
-        public void TestAssertPoint_InputProperties_Exception_Helper(List<Point3d> exp,
+        [ClassData(typeof(TestAssertPoint_InputProperties_Exception))]
+        public void TestAssertPoint_InputProperties_Exception(List<Point3d> exp,
             List<Point3d> act, List<string> names, double tolerance, string message)
         {
             var exception = Assert.Throws<ArgumentException>(() => new Test(exp, act, names, tolerance));
@@ -122,8 +122,8 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertPoint_Result_Helper))]
-        public void TestAssertPoint_Result_Helper(List<Point3d> exp,
+        [ClassData(typeof(TestAssertPoint_Result))]
+        public void TestAssertPoint_Result(List<Point3d> exp,
             List<Point3d> act, List<string> names, double tolerance, List<string> result)
         {
             Test testObject = new Test(exp, act, names, tolerance);
@@ -131,16 +131,16 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertPoint_Failed_Helper))]
-        public void TestAssertPoint_Failed_Helper(List<Point3d> exp, List<Point3d> act, List<string> names, double tolerance, bool failed)
+        [ClassData(typeof(TestAssertPoint_Failed))]
+        public void TestAssertPoint_Failed(List<Point3d> exp, List<Point3d> act, List<string> names, double tolerance, bool failed)
         {
             Test testObject = new Test(exp, act, names, tolerance);
             Assert.Equal(failed, testObject.Failed);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertPoint_FailedInfo_Helper))]
-        public void TestAssertPoint_FailedInfo_Helper(List<Point3d> exp, List<Point3d> act,
+        [ClassData(typeof(TestAssertPoint_FailedInfo))]
+        public void TestAssertPoint_FailedInfo(List<Point3d> exp, List<Point3d> act,
             List<string> names, double tolerance, List<string> failedInfo)
         {
             Test testObject = new Test(exp, act, names, tolerance);
@@ -150,8 +150,8 @@ namespace BrontosaurusEngineTests
         // ---------- AssertVector tests ----------
 
         [Theory]
-        [ClassData(typeof(TestAssertVector_InputProperties_Helper))]
-        public void TestAssertVector_InputProperties_Helper(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance)
+        [ClassData(typeof(TestAssertVector_InputProperties))]
+        public void TestAssertVector_InputProperties(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance)
         {
             Test testObject = new Test(exp, act, names, tolerance);
 
@@ -162,8 +162,8 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertVector_InputProperties_Exception_Helper))]
-        public void TestAssertVector_InputProperties_Exception_Helper(List<Vector3d> exp,
+        [ClassData(typeof(TestAssertVector_InputProperties_Exception))]
+        public void TestAssertVector_InputProperties_Exception(List<Vector3d> exp,
             List<Vector3d> act, List<string> names, double tolerance, string message)
         {
             var exception = Assert.Throws<ArgumentException>(() => new Test(exp, act, names, tolerance));
@@ -171,16 +171,16 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertVector_Result_Helper))]
-        public void TestAssertVector_Result_Helper(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance, List<string> result)
+        [ClassData(typeof(TestAssertVector_Result))]
+        public void TestAssertVector_Result(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance, List<string> result)
         {
             Test testObject = new Test(exp, act, names, tolerance);
             Assert.Equal(result, testObject.Result);
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertVector_Failed_Helper))]
-        public void TestAssertVector_Failed_Helper(List<Vector3d> exp,
+        [ClassData(typeof(TestAssertVector_Failed))]
+        public void TestAssertVector_Failed(List<Vector3d> exp,
             List<Vector3d> act, List<string> names, double tolerance, bool failed)
         {
             Test testObject = new Test(exp, act, names, tolerance);
@@ -188,8 +188,8 @@ namespace BrontosaurusEngineTests
         }
 
         [Theory]
-        [ClassData(typeof(TestAssertVector_FailedInfo_Helper))]
-        public void TestAssertVector_FailedInfo_Helper(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance, List<string> failedInfo)
+        [ClassData(typeof(TestAssertVector_FailedInfo))]
+        public void TestAssertVector_FailedInfo(List<Vector3d> exp, List<Vector3d> act, List<string> names, double tolerance, List<string> failedInfo)
         {
             Test testObject = new Test(exp, act, names, tolerance);
             Assert.Equal(failedInfo, testObject.FailedInfo);
