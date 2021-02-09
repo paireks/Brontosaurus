@@ -49,13 +49,13 @@ namespace Brontosaurus
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             string name = "";
-            List<Vector3d> actual = new List<Vector3d>();
             List<Vector3d> expected = new List<Vector3d>();
+            List<Vector3d> actual = new List<Vector3d>();
             double tolerance = 0.0;
 
             DA.GetData(0, ref name);
-            DA.GetDataList(1, actual);
-            DA.GetDataList(2, expected);
+            DA.GetDataList(1, expected);
+            DA.GetDataList(2, actual);
             DA.GetData(3, ref tolerance);
 
             DestroyIconCache();

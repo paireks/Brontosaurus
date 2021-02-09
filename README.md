@@ -16,7 +16,7 @@ Brontosaurus can be used when you want to create unit tests for your GHPython sc
 
 It can be used with Pterodactyl, so you can create reports for your unit tests and save it in .html, .pdf, etc.
 
-## Features (1.0.0)
+## Features (1.0.1)
 
 - Assert: Assert, Assert List, Assert Bool
 - Assert Geo: Assert Point, Assert Point List, Assert Vector, Assert Vector List
@@ -37,6 +37,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Tutorials
 
 Examples will be posted in the future on my youtube channel, here: https://www.youtube.com/channel/UCfXkMo1rOMhKGBoNwd7JPsw
+
+## Fixes
+
+- 1.0.1: Switch between expected and actual in the Brontosaurus project, the failed info should look like this: Expected != Actual.
 
 ## Contact
 
