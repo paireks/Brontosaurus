@@ -45,12 +45,13 @@ namespace Brontosaurus
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             List<string> names = new List<string>();
-            List<string> actual = new List<string>();
             List<string> expected = new List<string>();
+            List<string> actual = new List<string>();
 
             DA.GetDataList(0, names);
-            DA.GetDataList(1, actual);
-            DA.GetDataList(2, expected);
+            DA.GetDataList(1, expected);
+            DA.GetDataList(2, actual);
+
 
             DestroyIconCache();
 
