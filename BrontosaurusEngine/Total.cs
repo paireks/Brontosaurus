@@ -8,8 +8,6 @@ namespace BrontosaurusEngine
 {
     public class Total
     {
-        readonly char _separator = ";".ToCharArray()[0];
-
         private int _passedCounter;
         private int _failedCounter;
         private float _passedPercent;
@@ -29,7 +27,7 @@ namespace BrontosaurusEngine
             foreach (var i in Results)
             {
                 string[] parts;
-                parts = i.Split(_separator);
+                parts = i.Split(Settings.Separator);
                 if (parts[1] == "OK")
                 {
                     _passedCounter++;

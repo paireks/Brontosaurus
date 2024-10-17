@@ -12,6 +12,7 @@ namespace BrontosaurusEngine
         private List<string> _result;
         private List<string> _failedInfo;
         private bool _failed;
+        private List<string> _names;
         public Test(List<string> expected, List<string> actual, List<string> names)
         {
             Expected = expected;
@@ -187,7 +188,18 @@ namespace BrontosaurusEngine
         public List<string> Actual { get; set; }
         public List<Point3d> ActualPoints { get; set; }
         public List<Vector3d> ActualVectors { get; set; }
-        public List<string> Names { get; set; }
+        public List<string> Names
+        {
+            get => _names;
+            private set
+            {
+                if (value.Any(x => x.Contains(Settings.Separator))) {
+                    throw new ArgumentException("Test name cannot contain a \";\" char");
+                }
+
+                _names = value;
+            }
+        }
         public List<string> Result
         {
             get { return _result; }
